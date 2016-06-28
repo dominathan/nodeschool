@@ -50,3 +50,64 @@ function doubleAll(numbers) {
 }
 
 module.exports = checkUsersValid
+
+
+function countWords(inputWords) {
+  // SOLUTION GOES HERE
+  return inputWords.reduce(function(memo,element) {
+    if(memo[element]) {
+      memo[element] += 1
+    } else {
+      memo[element] = 1;
+    }
+    return memo
+  },{})
+}
+
+module.exports = countWords
+
+
+
+function reduce(arr, fn, initial) {
+  // SOLUTION GOES HERE
+  function newReduce(idx,obj) {
+    if(idx > arr.length - 1) return obj
+    return newReduce(idx + 1, fn(obj,arr[idx],idx,arr))
+  }
+
+  return newReduce(0,initial);
+}
+
+module.exports = reduce
+
+
+function duckCount() {
+   // SOLUTION GOES HERE
+   var args = [].slice.call(arguments)
+   return args.filter(function(object) {
+     return Object.prototype.hasOwnProperty.call(object,'quack')
+   }).length;
+ }
+
+ module.exports = duckCount
+
+
+
+function logger(namespace) {
+  // SOLUTION GOES HERE
+  return function() {
+    var args = [].slice.call(arguments)
+    console.log(namespace + " " + args.join(" "));
+  }
+};
+
+module.exports = logger
+
+
+
+
+module.exports = function(namespace) {
+  // SOLUTION GOES HERE
+
+  
+}

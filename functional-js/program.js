@@ -108,6 +108,32 @@ module.exports = logger
 
 module.exports = function(namespace) {
   // SOLUTION GOES HERE
-
-  
+  return console.log.bind(console,namespace)
 }
+
+
+
+module.exports = function arrayMap(arr, fn) {
+  // SOLUTION GOES HERE
+  return arr.reduce(function(memo,element,idx,arr) {
+    memo.push(fn(element));
+    return memo
+  },[])
+}
+
+function Spy(target, method) {
+  // SOLUTION GOES HERE
+  var oldFunc = target[method];
+  var counter = {
+    count: 0
+  }
+
+  target[method] = function() {
+    counter.count += 1;
+    return oldFunc.apply(this,arguments);
+  }
+
+  return counter;
+}
+
+module.exports = Spy

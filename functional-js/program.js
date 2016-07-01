@@ -4,7 +4,7 @@ function upperCaser(input) {
 
 module.exports = upperCaser;
 
-
+/* ----------------------------------- */
 function repeat(operation, num) {
   for(var i=0; i<num;i++) {
     operation();
@@ -14,7 +14,7 @@ function repeat(operation, num) {
 // Do not remove the line below
 module.exports = repeat
 
-
+/* ----------------------------------- */
 function doubleAll(numbers) {
   return numbers.map(function(num) {
     return num * 2;
@@ -24,7 +24,7 @@ function doubleAll(numbers) {
  module.exports = doubleAll
 
 
-
+/* ----------------------------------- */
  function getShortMessages(messages) {
    // SOLUTION GOES HERE
    return messages.filter(function(message) {
@@ -37,7 +37,7 @@ function doubleAll(numbers) {
 
  module.exports = getShortMessages
 
-
+/* ----------------------------------- */
  function checkUsersValid(goodUsers) {
   return function allUsersValid(submittedUsers) {
     // SOLUTION GOES HERE
@@ -51,7 +51,7 @@ function doubleAll(numbers) {
 
 module.exports = checkUsersValid
 
-
+/* ----------------------------------- */
 function countWords(inputWords) {
   // SOLUTION GOES HERE
   return inputWords.reduce(function(memo,element) {
@@ -67,7 +67,7 @@ function countWords(inputWords) {
 module.exports = countWords
 
 
-
+/* ----------------------------------- */
 function reduce(arr, fn, initial) {
   // SOLUTION GOES HERE
   function newReduce(idx,obj) {
@@ -80,7 +80,7 @@ function reduce(arr, fn, initial) {
 
 module.exports = reduce
 
-
+/* ----------------------------------- */
 function duckCount() {
    // SOLUTION GOES HERE
    var args = [].slice.call(arguments)
@@ -92,7 +92,7 @@ function duckCount() {
  module.exports = duckCount
 
 
-
+/* ----------------------------------- */
 function logger(namespace) {
   // SOLUTION GOES HERE
   return function() {
@@ -105,14 +105,14 @@ module.exports = logger
 
 
 
-
+/* ----------------------------------- */
 module.exports = function(namespace) {
   // SOLUTION GOES HERE
   return console.log.bind(console,namespace)
 }
 
 
-
+/* ----------------------------------- */
 module.exports = function arrayMap(arr, fn) {
   // SOLUTION GOES HERE
   return arr.reduce(function(memo,element,idx,arr) {
@@ -121,6 +121,8 @@ module.exports = function arrayMap(arr, fn) {
   },[])
 }
 
+
+/* ----------------------------------- */
 function Spy(target, method) {
   // SOLUTION GOES HERE
   var oldFunc = target[method];
@@ -138,7 +140,7 @@ function Spy(target, method) {
 
 module.exports = Spy
 
-
+/* ----------------------------------- */
 // I have a basic understanding why this works but would like further explanation.
 function repeat(operation, num) {
   // modify this so it can be interrupted
@@ -155,3 +157,71 @@ function repeat(operation, num) {
 }
 
 module.exports = repeat
+
+/* ----------------------------------- */
+function* repeat(operation, num) {
+    // Modify this so it doesn't cause a stack overflow!
+   while(num>=0) {
+      --num
+      yield operation
+   }
+   return repeat(operation, --num)
+ }
+
+ function trampoline(fn) {
+   // You probably want to implement a trampoline!
+ }
+
+ module.exports = function(operation, num) {
+   // You probably want to call your trampoline here!
+   return repeat(operation, num).next();
+ }
+
+/* ----------------------------------- */
+
+ function loadUsers(userIds, load, done) {
+    userIds.forEach(function(element) {
+      return new Promise(function(resolve,reject) {
+        load(element,function() {
+          resolve(done)
+        })
+      })
+    }).then(function(data) {
+      return data;
+    })
+ }
+
+ module.exports = loadUsers
+
+ /* ----------------------------------- */
+
+function getDependencies(tree, dependencyList) {
+    //base case
+    var dependencyList = dependencyList || []
+    if(!tree || !tree.dependencies) return dependencyList
+    var deps = tree.dependencies || {}
+
+    var arrayDeps = Object.keys(tree.dependencies)
+    arrayDeps.forEach(function(dep) {
+      var dependencyString = dep + '@' + deps[dep]['version'];
+      if(!dependencyList.includes(dependencyString)) {
+        dependencyList.push(dependencyString)
+      }
+
+      getDependencies(deps[dep],dependencyList)
+    })
+    return dependencyList.sort()
+}
+
+ module.exports = getDependencies
+
+/* ----------------------------------- */
+
+ function curryN(fn, n) {
+   // SOLUTION GOES HERE
+   var arity = n || fn.length;
+
+   
+ }
+
+ module.exports = curryN
